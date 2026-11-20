@@ -1,20 +1,32 @@
 # DIVERSION Updates 🐒🍌
 
-Öffentliche macOS-Installationsdateien für den DIVERSION VST3-Synthesizer.
+Öffentliche macOS-Installationsdateien für **DIVERSION**, einen VST3-Synthesizer für Ableton Live.
 
-Der Quellcode liegt derzeit in einem **privaten** Repository und ist nicht Bestandteil dieses Download-Bereichs. Diese Veröffentlichung räumt keine Open-Source-Lizenz für den Quellcode ein.
+**Der DIVERSION-Quellcode ist privat.** Dieses Repository enthält nur Informationen und fertige Installationsdateien. Der Quellcode steht derzeit nicht unter einer Open-Source-Lizenz.
 
-## Installation
+## Erstinstallation
 
-1. Auf der [Releases-Seite](https://github.com/captnhanky/DIVERSION-Updates/releases) die neueste macOS-DMG herunterladen.
-2. DMG öffnen und Ableton Live vollständig beenden.
-3. **DIVERSION installieren.command** ausführen. Gegebenenfalls per Rechtsklick → Öffnen erlauben.
-4. Ableton Live erneut starten.
+1. Lade auf der [Releases-Seite](https://github.com/captnhanky/DIVERSION-Updates/releases) die neueste `DIVERSION-Installer.dmg` herunter.
+2. Öffne die DMG und beende Ableton Live vollständig.
+3. Starte **DIVERSION installieren.command**.
+4. Öffne Ableton Live und gegebenenfalls den VST3-Scan.
 
-## Updates
+## Updates direkt im Plugin (ab v0.9.0)
 
-DIVERSION verwendet die öffentliche [GitHub-Releases-API](https://api.github.com/repos/captnhanky/DIVERSION-Updates/releases/latest), um verfügbare Versionen zu prüfen. Fertige Versionen werden hier als GitHub Releases mit einer `DIVERSION-Installer.dmg` veröffentlicht.
+- **UPDATE** prüft diese öffentlichen GitHub Releases.
+- Bei einer neueren Version wird **GET vX.Y.Z** angezeigt.
+- Erneuter Klick startet den Download über den lokalen macOS-Update-Helfer.
+- Nach geprüftem SHA-256-Hash erscheint **QUIT LIVE**. Beende Ableton Live: Der Helfer installiert die VST3 selbstständig und legt bei einem Fehler die vorige Version wieder zurück.
+- Neustart von Ableton Live lädt die neue Version.
 
-**Noch kein Release vorhanden:** Der automatische Aktualisierer wird erst nach Veröffentlichung eines passenden DMG-Releases funktionieren.
+Der lokale Update-Helfer wird zusammen mit DIVERSION installiert; **GitHub-Releases führen keine heruntergeladenen Skripte aus**. Das Update wird ausschließlich installiert, wenn GitHub einen SHA-256-Digest für das DMG bereitstellt. Die genaue Version ist im Plugin oben sichtbar.
 
-Die Dateien sind derzeit nicht mit einer Apple Developer ID signiert oder notarisiert. Bitte vor der Installation aus vertrauenswürdiger Quelle prüfen.
+**Die Funktion benötigt einen veröffentlichten DMG-Release.** Ein leeres Releases-Verzeichnis liefert noch keine Updates.
+
+Die VST3 ist zurzeit **nicht Apple-signiert oder notarisiert**. Auf macOS kann deshalb bei der ersten Installation eine Sicherheitsfreigabe erforderlich sein.
+
+## Für die Veröffentlichung
+
+Das private Build-Repository kann erfolgreiche DMGs automatisch als Release in dieses öffentliche Repository hochladen. Dafür ist im privaten Repo das GitHub Actions Secret `DIVERSION_UPDATES_TOKEN` nötig: ein Fine-grained Personal Access Token mit **Contents: Read and write**, ausschließlich für `captnhanky/DIVERSION-Updates`. Der Token darf niemals im Plugin oder in einem Commit gespeichert werden.
+
+Release-Tags müssen zum Plugin passen (beispielsweise `v0.9.0`) und ein Asset namens `DIVERSION-Installer.dmg` enthalten. Bestehende Versionen werden nicht stillschweigend ersetzt.
